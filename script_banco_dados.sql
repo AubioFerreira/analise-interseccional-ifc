@@ -58,3 +58,30 @@ SELECT
         ELSE 'Outras Necessidades'
     END AS necessidade_principal
 FROM public.dados_ifc_neabi;
+-- ==========================================================
+-- ETAPA AC3: Interseccionalidade Funcional e Auditoria de Dados
+-- OBJETIVO: View para análise de servidores (Docentes e Técnicos)
+-- ==========================================================
+
+-- 1. Limpeza de segurança para renovação da estrutura
+DROP VIEW IF EXISTS vw_ac3_final_servidores CASCADE;
+
+-- 2. Criação da View especializada para o corpo de servidores
+CREATE VIEW vw_ac3_final_servidores AS
+SELECT 
+    campus, 
+    categoria, 
+    -- Tratamento de nulos com COALESCE para auditoria do NEABI
+    COALESCE(cor_raca, 'Não Declarado') as cor_raca
+FROM public.dados_ifc_neabi
+-- Filtro para isolar apenas as categorias funcionais do IFC
+WHERE categoria IN ('Docente', 'Técnico Administrativo');
+
+-- 3. Validação dos dados de auditoria racial
+-- Este comando comprova a ausência de autodeclaração na base atual
+SELECT 
+    cor_raca, 
+    COUNT(*) as total,
+    ROUND((COUNT(*) * 100.0 / SUM(COUNT(*)) OVER()), 2) as percentual
+FROM vw_ac3_final_servidores
+GROUP BY cor_raca;
