@@ -85,3 +85,33 @@ SELECT
     ROUND((COUNT(*) * 100.0 / SUM(COUNT(*)) OVER()), 2) as percentual
 FROM vw_ac3_final_servidores
 GROUP BY cor_raca;
+-- ==========================================================
+-- ETAPA AC4 (PROVA FINAL): Comparativo de Diversidade
+-- OBJETIVO: View para cruzar o perfil de Alunos vs Servidores
+-- ==========================================================
+
+-- 1. Limpeza de segurança
+DROP VIEW IF EXISTS vw_ac4_prova_comparativo CASCADE;
+
+-- 2. Criação da View de cruzamento (Discentes vs Servidores)
+CREATE VIEW vw_ac4_prova_comparativo AS
+SELECT 
+    campus,
+    -- Criação do super-grupo para facilitar a visualização no BI
+    CASE 
+        WHEN categoria IN ('Docente', 'Técnico Administrativo', 'Técnico') THEN 'Servidor (Docente/Técnico)'
+        WHEN categoria = 'Discente' THEN 'Aluno (Discente)'
+        ELSE 'Outros'
+    END AS grupo_comunidade,
+    -- Tratamento de nulos herdado da AC3
+    COALESCE(cor_raca, 'Não Declarado') AS cor_raca,
+    COUNT(*) as total_pessoas
+FROM public.dados_ifc_neabi
+GROUP BY 
+    campus,
+    CASE 
+        WHEN categoria IN ('Docente', 'Técnico Administrativo', 'Técnico') THEN 'Servidor (Docente/Técnico)'
+        WHEN categoria = 'Discente' THEN 'Aluno (Discente)'
+        ELSE 'Outros'
+    END,
+    COALESCE(cor_raca, 'Não Declarado');
