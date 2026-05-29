@@ -60,25 +60,38 @@ SELECT
 FROM public.dados_ifc_neabi;
 -- ==========================================================
 -- ETAPA AC3: Interseccionalidade Funcional e Auditoria de Dados
--- OBJETIVO: View para análise de servidores (Docentes e Técnicos)
+-- OBJETIVO: Views para análise de servidores (Docentes e Técnicos)
 -- ==========================================================
 
 -- 1. Limpeza de segurança para renovação da estrutura
 DROP VIEW IF EXISTS vw_ac3_final_servidores CASCADE;
+DROP VIEW IF EXISTS vw_ac3_servidores_interseccional CASCADE;
 
--- 2. Criação da View especializada para o corpo de servidores
+-- 2. Criação da View especializada para auditoria do NEABI
 CREATE VIEW vw_ac3_final_servidores AS
 SELECT 
     campus, 
     categoria, 
-    -- Tratamento de nulos com COALESCE para auditoria do NEABI
     COALESCE(cor_raca, 'Não Declarado') as cor_raca
 FROM public.dados_ifc_neabi
--- Filtro para isolar apenas as categorias funcionais do IFC
 WHERE categoria IN ('Docente', 'Técnico Administrativo');
 
--- 3. Validação dos dados de auditoria racial
--- Este comando comprova a ausência de autodeclaração na base atual
+-- 3. Criação da View para análise interseccional de Servidores
+CREATE VIEW vw_ac3_servidores_interseccional AS
+SELECT 
+    campus,
+    categoria, 
+    COALESCE(cor_raca, 'Não Declarado') as cor_raca,
+    COALESCE(possui_necessidade_especial, 'Não Informado') as possui_necessidade_especial,
+    CASE 
+        WHEN cor_raca IN ('Preta', 'Parda') THEN 'Negros (Pretos/Pardos)'
+        WHEN cor_raca IS NULL OR cor_raca = 'Não Declarado' THEN 'Não Declarado'
+        ELSE cor_raca 
+    END AS grupo_etnico
+FROM public.dados_ifc_neabi
+WHERE categoria IN ('Docente', 'Técnico');
+
+-- 4. Validação dos dados de auditoria racial (100% ausência)
 SELECT 
     cor_raca, 
     COUNT(*) as total,
