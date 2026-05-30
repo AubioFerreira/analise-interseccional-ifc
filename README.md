@@ -7,9 +7,12 @@
 > **Objetivo Institucional:** Solução de Business Intelligence e criação de uma camada de persistência de dados para o NEABI. O projeto analisa a comunidade acadêmica do Instituto Federal Catarinense (IFC), evidenciando o apagamento de dados de autodeclaração étnico-racial no quadro funcional, contrastando-o com a diversidade discente.
 
 ## 🔗 Artefatos do Projeto
-* 📋 **Gestão Ágil (Kanban):** [Acessar o Quadro do Projeto](https://github.com/users/AubioFerreira/projects/2)
-* 🎬 **Apresentação Final (Pitch Técnico):** [Assistir ao Vídeo no YouTube](#) 
 
+* 📋 **Gestão Ágil (Kanban):** [Acessar o Quadro do Projeto](https://github.com/users/AubioFerreira/projects/2)
+* 📐 **Modelagem de Dados:** [Visualizar os Diagramas (MER e UML)](./pasta-com-as-imagens-dos-diagramas)
+* 💾 **Scripts SQL:** [Acessar códigos de criação das Views e ETL](./pasta-com-os-scripts.sql)
+* 📊 **Dashboard BI:** [Baixar o arquivo Power BI (.pbix)](./arquivo-do-dashboard.pbix)
+* 📄 **Documentação:** [Ler o Relatório Final em PDF](./relatorio-final.pdf)
 ---
 
 ## 1. Arquitetura de Dados e Pipeline ETL
