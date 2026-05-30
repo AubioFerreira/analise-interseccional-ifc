@@ -9,7 +9,7 @@
 ## 🔗 Artefatos do Projeto
 
 * 📋 **Gestão Ágil (Kanban):** [Acessar o Quadro do Projeto](https://github.com/users/AubioFerreira/projects/2)
-* 📐 **Modelagem de Dados:** [Visualizar os Diagramas (MER e UML)](./pasta-com-as-imagens-dos-diagramas)
+* 📐 **Modelagem de Dados:** [Visualizar os Diagramas (MER)](./pasta-com-as-imagens-dos-diagramas)
 * 💾 **Scripts SQL:** [Acessar códigos de criação das Views e ETL](./pasta-com-os-scripts.sql)
 * 📊 **Dashboard BI:** [Baixar o arquivo Power BI (.pbix)](./arquivo-do-dashboard.pbix)
 * 📄 **Documentação:** [Ler o Relatório Final em PDF](./relatorio-final.pdf)
