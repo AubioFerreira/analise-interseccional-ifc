@@ -9,10 +9,10 @@
 ## 🔗 Artefatos do Projeto
 
 * 📋 **Gestão Ágil (Kanban):** [Acessar o Quadro do Projeto](https://github.com/users/AubioFerreira/projects/2)
-* 📐 **Modelagem de Dados:** [Visualizar os Diagramas (MER)](./pasta-com-as-imagens-dos-diagramas)
-* 💾 **Scripts SQL:** [Acessar códigos de criação das Views e ETL](./pasta-com-os-scripts.sql)
-* 📊 **Dashboard BI:** [Baixar o arquivo Power BI (.pbix)](./arquivo-do-dashboard.pbix)
-* 📄 **Documentação:** [Ler o Relatório Final em PDF](./relatorio-final.pdf)
+* 📐 **Modelagem de Dados:** [Visualizar o Diagrama (MER)](https://github.com/AubioFerreira/analise-interseccional-ifc/blob/main/MER.drawio.png)
+* 💾 **Scripts SQL:** [Acessar códigos de criação das Views e ETL]https://github.com/AubioFerreira/analise-interseccional-ifc/blob/main/script_banco_dados.sql
+* 📊 **Dashboard BI:** [Baixar o arquivo Power BI (.pbix)](https://github.com/AubioFerreira/analise-interseccional-ifc/blob/main/Dashboard_NEABI_IFC_v1.pbix)
+* 📄 **Documentação:** [Ler o Relatório Final em PDF](./caminho-do-relatorio.pdf)
 ---
 
 ## 1. Arquitetura de Dados e Pipeline ETL
