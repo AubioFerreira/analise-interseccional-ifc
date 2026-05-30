@@ -7,7 +7,7 @@
 > **Objetivo Institucional:** Solução de Business Intelligence e criação de uma camada de persistência de dados para o NEABI. O projeto analisa a comunidade acadêmica do Instituto Federal Catarinense (IFC), evidenciando o apagamento de dados de autodeclaração étnico-racial no quadro funcional, contrastando-o com a diversidade discente.
 
 ## 🔗 Artefatos do Projeto
-* 📋 **Gestão Ágil (Kanban):** [Acessar o Quadro do Projeto](#) 
+* 📋 **Gestão Ágil (Kanban):** [Acessar o Quadro do Projeto](https://github.com/users/AubioFerreira/projects/2)
 * 🎬 **Apresentação Final (Pitch Técnico):** [Assistir ao Vídeo no YouTube](#) 
 
 ---
