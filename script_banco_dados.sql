@@ -59,25 +59,25 @@ SELECT
     END AS necessidade_principal
 FROM public.dados_ifc_neabi;
 -- ==========================================================
--- ETAPA AC3: Interseccionalidade Funcional e Auditoria de Dados
--- OBJETIVO: Views para análise de servidores (Docentes e Técnicos)
+-- SCRIPT DE AUDITORIA NEABI - CONSOLIDAÇÃO FINAL
 -- ==========================================================
 
--- 1. Limpeza de segurança para renovação da estrutura
+-- 1. Limpeza de segurança
 DROP VIEW IF EXISTS vw_ac3_final_servidores CASCADE;
 DROP VIEW IF EXISTS vw_ac3_servidores_interseccional CASCADE;
 
--- 2. Criação da View especializada para auditoria do NEABI
-CREATE VIEW vw_ac3_final_servidores AS
+-- 2. View: Auditoria geral de servidores (Lista limpa)
+CREATE OR REPLACE VIEW vw_ac3_final_servidores AS
 SELECT 
     campus, 
     categoria, 
     COALESCE(cor_raca, 'Não Declarado') as cor_raca
 FROM public.dados_ifc_neabi
-WHERE categoria IN ('Docente', 'Técnico Administrativo');
+WHERE categoria IN ('Docente', 'Técnico', 'Técnico Administrativo');
 
--- 3. Criação da View para análise interseccional de Servidores
-CREATE VIEW vw_ac3_servidores_interseccional AS
+-- 3. View: Análise interseccional (Foco no BI e Gráficos)
+-- Esta view unifica as variações de nomes e categoriza o grupo étnico
+CREATE OR REPLACE VIEW vw_ac3_servidores_interseccional AS
 SELECT 
     campus,
     categoria, 
@@ -85,19 +85,22 @@ SELECT
     COALESCE(possui_necessidade_especial, 'Não Informado') as possui_necessidade_especial,
     CASE 
         WHEN cor_raca IN ('Preta', 'Parda') THEN 'Negros (Pretos/Pardos)'
-        WHEN cor_raca IS NULL OR cor_raca = 'Não Declarado' THEN 'Não Declarado'
-        ELSE cor_raca 
+        WHEN cor_raca = 'Branca' THEN 'Branca'
+        WHEN cor_raca = 'Indígena' THEN 'Indígena'
+        WHEN cor_raca = 'Amarela (de origem oriental)' THEN 'Amarela'
+        WHEN cor_raca IN ('Não Informado', 'Não declarada', 'Não Declarado') THEN 'Não Declarado'
+        ELSE 'Outros' 
     END AS grupo_etnico
 FROM public.dados_ifc_neabi
-WHERE categoria IN ('Docente', 'Técnico');
+WHERE categoria IN ('Docente', 'Técnico', 'Técnico Administrativo');
 
--- 4. Validação dos dados de auditoria racial (100% ausência)
+-- 4. Validação rápida: Verifique se o resultado traz as categorias esperadas
 SELECT 
-    cor_raca, 
-    COUNT(*) as total,
-    ROUND((COUNT(*) * 100.0 / SUM(COUNT(*)) OVER()), 2) as percentual
-FROM vw_ac3_final_servidores
-GROUP BY cor_raca;
+    grupo_etnico, 
+    COUNT(*) as total
+FROM vw_ac3_servidores_interseccional
+GROUP BY grupo_etnico
+ORDER BY total DESC;
 -- ==========================================================
 -- ETAPA AC4 (PROVA FINAL): Comparativo de Diversidade
 -- OBJETIVO: View para cruzar o perfil de Alunos vs Servidores
