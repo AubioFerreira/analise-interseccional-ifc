@@ -36,12 +36,12 @@ Para facilitar a interpretação do contexto institucional e das regras de negó
 
 | Acrônimo / Termo | Significado Institucional | Contexto no Projeto |
 | :--- | :--- | :--- |
-| **IFC** | Instituto Federal Catarinense | Autarquia federal de ensino foco da análise de dados[cite: 2]. |
-| **NEABI** | Núcleo de Estudos Afro-Brasileiros e Indígenas | Núcleo proponente responsável por formular políticas de equidade[cite: 2]. |
-| **Discente** | Aluno Matriculado | Público-alvo das análises de diversidade e acessibilidade escolar[cite: 2]. |
-| **Servidor** | Corpo Funcional (Docentes e Técnicos) | Analisados quanto à ocupação de cargos e preenchimento de perfil racial[cite: 2]. |
-| **PNE** | Pessoa com Necessidade Específica | Alunos ou servidores que necessitam de atendimento especializado ou acessibilidade[cite: 2]. |
-| **TAE** | Técnico-Administrativo em Educação | Categoria funcional de servidores que atuam no suporte e gestão institucional[cite: 2]. |
+| **IFC** | Instituto Federal Catarinense | Autarquia federal de ensino foco da análise de dados. |
+| **NEABI** | Núcleo de Estudos Afro-Brasileiros e Indígenas | Núcleo proponente responsável por formular políticas de equidade. |
+| **Discente** | Aluno Matriculado | Público-alvo das análises de diversidade e acessibilidade escolar. |
+| **Servidor** | Corpo Funcional (Docentes e Técnicos) | Analisados quanto à ocupação de cargos e preenchimento de perfil racial. |
+| **PNE** | Pessoa com Necessidade Específica | Alunos ou servidores que necessitam de atendimento especializado ou acessibilidade. |
+| **TAE** | Técnico-Administrativo em Educação | Categoria funcional de servidores que atuam no suporte e gestão institucional. |
 
 ---
 
@@ -49,9 +49,9 @@ Para facilitar a interpretação do contexto institucional e das regras de negó
 
 A engenharia de dados aplicada na unificação das fontes permitiu extrair métricas cruciais sobre a realidade da instituição:
 
-* **A Lacuna Crítica no Quadro Funcional:** Foi identificada uma severa lacuna de autodeclaração racial entre os servidores do IFC, totalizando **89,73% de registros sem informação** (`Não Declarado`), o que representa 1.756 servidores funcionais fora do mapeamento de diversidade[cite: 2].
-* **Contraste de Autodeclaração (Alunos vs. Servidores):** Enquanto o corpo discente apresenta um excelente índice de preenchimento, com apenas **3,86% de lacuna racial**, o corpo de servidores perpetua uma ausência crônica de dados, inviabilizando análises de representatividade robustas para o comitê do NEABI[cite: 2].
-* **Mapeamento de Neurodivergências Discentes:** Com a separação rigorosa de contextos promovida na AC2, identificou-se que o Transtorno do Espectro Autista (**TEA**) lidera as notificações de acessibilidade estudantil com **202 registros**, seguido de perto por **173 casos de TDAH**, direcionando de forma assertiva onde a reitoria deve aplicar os recursos de inclusão[cite: 2].
+* **A Lacuna Crítica no Quadro Funcional:** Foi identificada uma severa lacuna de autodeclaração racial entre os servidores do IFC, totalizando **89,73% de registros sem informação** (`Não Declarado`), o que representa 1.756 servidores funcionais fora do mapeamento de diversidade.
+* **Contraste de Autodeclaração (Alunos vs. Servidores):** Enquanto o corpo discente apresenta um excelente índice de preenchimento, com apenas **3,86% de lacuna racial**, o corpo de servidores perpetua uma ausência crônica de dados, inviabilizando análises de representatividade robustas para o comitê do NEABI.
+* **Mapeamento de Neurodivergências Discentes:** Com a separação rigorosa de contextos promovida na AC2, identificou-se que o Transtorno do Espectro Autista (**TEA**) lidera as notificações de acessibilidade estudantil com **202 registros**, seguido de perto por **173 casos de TDAH**, direcionando de forma assertiva onde a reitoria deve aplicar os recursos de inclusão.
 
 ---
 
@@ -68,8 +68,8 @@ A engenharia de dados aplicada na unificação das fontes permitiu extrair métr
 ## 1. Arquitetura de Dados e Pipeline ETL
 
 O ecossistema de dados foi estruturado seguindo as melhores práticas corporativas para garantir governança e escalabilidade:
-* **Ingestão (Extract):** Processamento de dados brutos institucionais (17.953 registros) via arquivos CSV higienizados em conformidade com as diretrizes da LGPD[cite: 2].
-* **Transformação (Transform):** Higienização avançada e tratamento de concorrência estrutural no PostgreSQL 17. Uso de `COALESCE` para tratamento de nulos, operadores de busca textual flexíveis (`ILIKE`) para *text mining* e tratamento de comorbidades, e **Window Functions (`OVER PARTITION BY`)** para realizar cálculos percentuais dinâmicos diretamente na fonte[cite: 2].
+* **Ingestão (Extract):** Processamento de dados brutos institucionais (17.953 registros) via arquivos CSV higienizados em conformidade com as diretrizes da LGPD.
+* **Transformação (Transform):** Higienização avançada e tratamento de concorrência estrutural no PostgreSQL 17. Uso de `COALESCE` para tratamento de nulos, operadores de busca textual flexíveis (`ILIKE`) para *text mining* e tratamento de comorbidades, e **Window Functions (`OVER PARTITION BY`)** para realizar cálculos percentuais dinâmicos diretamente na fonte.
 * **Carga (Load):** Conexão nativa e otimizada via Power BI, consumindo dados pré-calculados pelo banco de dados. Essa arquitetura zera o *overhead* de processamento no *frontend*, substituindo medidas DAX complexas por leitura de colunas prontas.
 
 ---
@@ -77,20 +77,20 @@ O ecossistema de dados foi estruturado seguindo as melhores práticas corporativ
 ## 2. A Jornada Iterativa (Entregas por Etapa)
 
 ### 📍 AC1: Camada de Persistência e Isolamento Discente
-* Estruturação da tabela principal `dados_ifc_neabi`[cite: 2].
-* Criação da View `vw_dados_ifc_neabi` para isolamento estrito do corpo discente, corrigindo distorções históricas e garantindo cruzamentos interseccionais puros (Raça vs. PcD)[cite: 2].
+* Estruturação da tabela principal `dados_ifc_neabi`.
+* Criação da View `vw_dados_ifc_neabi` para isolamento estrito do corpo discente, corrigindo distorções históricas e garantindo cruzamentos interseccionais puros (Raça vs. PcD).
 
 ### 📍 AC2: Inteligência de Acessibilidade e Neurodivergência
-* Desenvolvimento da View `vw_acessibilidade_final` focada exclusivamente em estudantes[cite: 2].
-* Implementação de mapeamento textual para geração de flags binárias indexadas para estruturação visual de condições médicas especializadas (TEA, TDAH, Altas Habilidades, Deficiências Físicas e Sensoriais)[cite: 2].
+* Desenvolvimento da View `vw_acessibilidade_final` focada exclusivamente em estudantes.
+* Implementação de mapeamento textual para geração de flags binárias indexadas para estruturação visual de condições médicas especializadas (TEA, TDAH, Altas Habilidades, Deficiências Físicas e Sensoriais).
 
 ### 📍 AC3: Interseccionalidade Funcional e Homologação de Dados
-* Criação da View especializada `vw_ac3_servidores_interseccional` focada estritamente no corpo funcional[cite: 2].
-* Implementação de lógica defensiva contra nulos (`OR cor_raca IS NULL`) para blindagem de cargas futuras e consolidação do agrupamento étnico-racial unificado (`grupo_etnico`)[cite: 2].
+* Criação da View especializada `vw_ac3_servidores_interseccional` focada estritamente no corpo funcional.
+* Implementação de lógica defensiva contra nulos (`OR cor_raca IS NULL`) para blindagem de cargas futuras e consolidação do agrupamento étnico-racial unificado (`grupo_etnico`).
 
 ### 📍 AC4 (Prova Final): Visões Comparativas Proporcionais e Performance
-* Criação das Views agregadas `vw_ac4_prova_comparativo_percentual` e `vw_ac4_prova_comparativo_pne_percentual`[cite: 2].
-* Utilização de funções de janela analíticas do SQL para calcular a distribuição percentual interna de cada campus por categoria, entregando um painel executivo responsivo de alta performance[cite: 2].
+* Criação das Views agregadas `vw_ac4_prova_comparativo_percentual` e `vw_ac4_prova_comparativo_pne_percentual`.
+* Utilização de funções de janela analíticas do SQL para calcular a distribuição percentual interna de cada campus por categoria, entregando um painel executivo responsivo de alta performance.
 
 ---
 
