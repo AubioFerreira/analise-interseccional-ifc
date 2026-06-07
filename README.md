@@ -143,8 +143,10 @@ O ecossistema de dados foi estruturado seguindo as melhores práticas corporativ
 * Implementação de lógica defensiva contra nulos (`OR cor_raca IS NULL`) para blindagem de cargas futuras e consolidação do agrupamento étnico-racial unificado (`grupo_etnico`).
 
 ### 📍 AC4 (Prova Final): Visões Comparativas Proporcionais e Performance
-* Criação das Views agregadas `vw_ac4_prova_comparativo_percentual` e `vw_ac4_prova_comparativo_pne_percentual`.
-* Utilização de funções de janela analíticas do SQL para calcular a distribuição percentual interna de cada campus por categoria, entregando um painel executivo responsivo de alta performance.
+
+* Implementação da view de consolidação `vw_ac4_prova_comparativo`, responsável pela padronização dos agrupamentos institucionais e étnico-raciais utilizados nas análises comparativas.
+* Criação das views derivadas `vw_ac4_prova_comparativo_percentual` e `vw_ac4_prova_comparativo_pne_percentual`, destinadas à análise proporcional da composição étnico-racial e das necessidades específicas entre estudantes e servidores.
+* Utilização de funções de janela (Window Functions), agregações analíticas e regras de negócio centralizadas para cálculo dinâmico de percentuais por campus e categoria, entregando um painel executivo responsivo, escalável e de alta performance.
 
 ---
 
