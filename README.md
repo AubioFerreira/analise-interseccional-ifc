@@ -115,7 +115,7 @@ Dessa forma, indicadores de representatividade podem estar sujeitos a limitaçõ
 * 📐 **Modelagem de Dados:** [Visualizar o Diagrama (MER)](https://github.com/AubioFerreira/analise-interseccional-ifc/blob/main/MER.png)
 * 💾 **Scripts SQL:** [Acessar códigos de criação das Views e ETL](https://github.com/AubioFerreira/analise-interseccional-ifc/blob/main/script_banco_dados.sql)
 * 📊 **Dashboard BI:** [Baixar o arquivo Power BI (.pbix)](https://github.com/AubioFerreira/analise-interseccional-ifc/blob/main/Dashboard_NEABI_IFC_v1.pbix)
-* 📄 **Documentação:** [Ler o Relatório Final em PDF](./caminho-do-relatorio.pdf)
+* 📄 **Documentação:** [Ler o Relatório Final em PDF](https://github.com/AubioFerreira/analise-interseccional-ifc/blob/main/ENGENHARIA%20DE%20DADOS%20E%20BUSINESS%20INTELLIGENCE%20APLICADOS%20%C3%80%20INTERSECCIONALIDADE%20%C3%89TNICO-RACIAL%20E%20%C3%80S%20NECESSIDADES%20ESPEC%C3%8DFICAS%20NO%20INSTITUTO%20FEDERAL%20CATARINENSE%20-%20FINAL.pdf)
 
 ---
 
