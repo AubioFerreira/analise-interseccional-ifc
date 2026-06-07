@@ -55,6 +55,16 @@ A engenharia de dados aplicada na unificação das fontes permitiu extrair métr
 
 ---
 
+## ⚠️ Nota Metodológica
+
+Os percentuais apresentados neste projeto refletem exclusivamente a situação dos registros disponíveis nos sistemas institucionais do Instituto Federal Catarinense (IFC) no momento da extração e processamento dos dados.
+
+As análises realizadas descrevem padrões de preenchimento cadastral, autodeclaração étnico-racial e informações de acessibilidade registradas administrativamente, não devendo ser interpretadas como representação demográfica exata da comunidade acadêmica ou do quadro funcional da instituição.
+
+Dessa forma, indicadores de representatividade podem estar sujeitos a limitações decorrentes da ausência, inconsistência ou desatualização de informações nos sistemas de origem, especialmente nos casos identificados de lacuna informacional.
+
+---
+
 ## 🔗 Artefatos do Projeto
 
 * 📋 **Gestão Ágil (Kanban):** [Acessar o Quadro do Projeto](https://github.com/users/AubioFerreira/projects/2)
@@ -269,3 +279,23 @@ SELECT
         (total_pessoas::numeric / SUM(total_pessoas) OVER (PARTITION BY campus, group_comunidade)) * 100, 2
     ) AS percentual_grupo
 FROM dados_consolidados;
+
+---
+
+```mermaid
+graph TD
+
+A[dados_ifc_neabi]
+
+A --> B[vw_dados_ifc_neabi]
+A --> C[vw_acessibilidade_final]
+A --> D[vw_ac3_servidores_interseccional]
+A --> E[vw_ac4_prova_comparativo_percentual]
+A --> F[vw_ac4_prova_comparativo_pne_percentual]
+
+B --> G[AC1 - Perfil Discente]
+C --> H[AC2 - Acessibilidade]
+D --> I[AC3 - Servidores]
+E --> J[AC4 - Comparativo Racial]
+F --> K[AC4 - Comparativo PNE]
+```
