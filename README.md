@@ -1,18 +1,20 @@
 # 📊 Engenharia de Dados e Business Intelligence Aplicados à Interseccionalidade Étnico-Racial e PNE
-### Projeto Farol IFC – Módulo de Análise Étnico-Racial e Acessibilidade
+### Projeto Farol IFC – Módulo de Análise Étnico-Racial e Necessidades Específicas
+
+Sistema de Business Intelligence para análise da composição étnico-racial, das necessidades específicas e das lacunas informacionais da comunidade acadêmica do Instituto Federal Catarinense.
 
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Power_BI](https://img.shields.io/badge/PowerBI-F2C811?style=for-the-badge&logo=Power%20BI&logoColor=black)
 ![SQL](https://img.shields.io/badge/SQL-003B57?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 
-> **Objetivo Institucional:** Desenvolvimento de uma solução de Business Intelligence e estruturação de uma camada de persistência e governança de dados para o NEABI (Núcleo de Estudos Afro-Brasileiros e Indígenas) do IFC - Campus Concórdia. O projeto analisa de forma analítica e interseccional a comunidade acadêmica do Instituto Federal Catarinense (IFC), mitigando falhas de contaminação de contexto e evidenciando com precisão o cenário de autodeclaração étnico-racial e acessibilidade.
+> **Objetivo Institucional:** Desenvolvimento de uma solução de Business Intelligence e estruturação de uma camada de persistência e governança de dados para o NEABI (Núcleo de Estudos Afro-Brasileiros e Indígenas) do IFC - Campus Concórdia. O projeto analisa de forma analítica e interseccional a comunidade acadêmica do Instituto Federal Catarinense (IFC), mitigando falhas de contaminação de contexto e evidenciando com precisão o cenário de autodeclaração étnico-racial, necessidades específicas e lacunas informacionais.
 
 ---
 
 ## 📌 Resumo Executivo
 
-O Farol IFC é uma solução de Business Intelligence desenvolvida para apoiar a análise da composição étnico-racial e dos indicadores de acessibilidade da comunidade acadêmica do Instituto Federal Catarinense (IFC).
+O Farol IFC é uma solução de Business Intelligence desenvolvida para apoiar a análise da composição étnico-racial e das necessidades específicas da comunidade acadêmica do Instituto Federal Catarinense (IFC).
 
 A partir da aplicação de técnicas de Engenharia de Dados, SQL e Power BI, foram construídas camadas analíticas capazes de identificar padrões de autodeclaração racial, lacunas informacionais, distribuição de pessoas com necessidades específicas e diferenças entre estudantes e servidores.
 
@@ -372,6 +374,6 @@ A --> F["AC4<br>Comparativo PNE"]
 
 O projeto demonstrou a aplicação prática de conceitos de Engenharia de Dados e Business Intelligence em um contexto institucional real.
 
-Por meio da utilização de PostgreSQL, SQL e Power BI, foi possível estruturar um ambiente analítico capaz de apoiar discussões relacionadas à diversidade étnico-racial, acessibilidade e qualidade dos registros institucionais.
+Por meio da utilização de PostgreSQL, SQL e Power BI, foi possível estruturar um ambiente analítico capaz de apoiar discussões relacionadas à diversidade étnico-racial, necessidades específicas e qualidade dos registros institucionais.
 
 Os resultados produzidos podem servir como subsídio para ações de gestão, planejamento institucional e fortalecimento das políticas de inclusão do Instituto Federal Catarinense.
