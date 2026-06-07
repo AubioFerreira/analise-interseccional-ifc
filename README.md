@@ -254,6 +254,75 @@ FROM public.dados_ifc_neabi
 WHERE categoria IN ('Docente', 'Técnico', 'Técnico Administrativo');
 
 -- ============================================================================
+-- ETAPA AC4 - CAMADA DE CONSOLIDAÇÃO COMPARATIVA
+-- OBJETIVO: Consolidar e padronizar os dados étnico-raciais de estudantes
+--           e servidores para utilização nas análises comparativas.
+-- ============================================================================
+
+DROP VIEW IF EXISTS public.vw_ac4_prova_comparativo CASCADE;
+
+CREATE VIEW public.vw_ac4_prova_comparativo AS
+SELECT
+    campus,
+
+    CASE
+        WHEN categoria IN ('Docente', 'Técnico Administrativo', 'Técnico')
+            THEN 'Servidor (Docente/Técnico)'
+        WHEN categoria = 'Discente'
+            THEN 'Aluno (Discente)'
+        ELSE 'Outros'
+    END AS grupo_comunidade,
+
+    COALESCE(cor_raca, 'Não Declarado') AS cor_raca,
+
+    CASE
+        WHEN cor_raca IN ('Preta', 'Parda')
+            THEN 'Negros (Pretos/Pardos)'
+        WHEN cor_raca = 'Branca'
+            THEN 'Branca'
+        WHEN cor_raca = 'Indígena'
+            THEN 'Indígena'
+        WHEN cor_raca = 'Amarela (de origem oriental)'
+            THEN 'Amarela'
+        WHEN cor_raca IN ('Não Informado', 'Não declarada', 'Não Declarado')
+             OR cor_raca IS NULL
+            THEN 'Não Declarado'
+        ELSE 'Outros'
+    END AS grupo_etnico,
+
+    COUNT(*) AS total_pessoas
+
+FROM public.dados_ifc_neabi
+
+GROUP BY
+    campus,
+
+    CASE
+        WHEN categoria IN ('Docente', 'Técnico Administrativo', 'Técnico')
+            THEN 'Servidor (Docente/Técnico)'
+        WHEN categoria = 'Discente'
+            THEN 'Aluno (Discente)'
+        ELSE 'Outros'
+    END,
+
+    COALESCE(cor_raca, 'Não Declarado'),
+
+    CASE
+        WHEN cor_raca IN ('Preta', 'Parda')
+            THEN 'Negros (Pretos/Pardos)'
+        WHEN cor_raca = 'Branca'
+            THEN 'Branca'
+        WHEN cor_raca = 'Indígena'
+            THEN 'Indígena'
+        WHEN cor_raca = 'Amarela (de origem oriental)'
+            THEN 'Amarela'
+        WHEN cor_raca IN ('Não Informado', 'Não declarada', 'Não Declarado')
+             OR cor_raca IS NULL
+            THEN 'Não Declarado'
+        ELSE 'Outros'
+    END;
+
+-- ============================================================================
 -- ETAPA AC4: VIEWS COMPARATIVAS INSTITUCIONAIS (PERCENTUALIZADAS)
 -- ============================================================================
 
@@ -342,14 +411,17 @@ A --> D["vw_ac3_servidores_interseccional"]
 A --> E["vw_ac4_prova_comparativo"]
 
 B --> F["AC1 - Perfil Discente"]
+
 C --> G["AC2 - Necessidades Específicas"]
-D --> H["AC3 - Servidores"]
+
+D --> H["AC3 - Perfil dos Servidores"]
 
 E --> I["vw_ac4_prova_comparativo_percentual"]
 E --> J["vw_ac4_prova_comparativo_pne_percentual"]
 
 I --> K["AC4 - Comparativo Étnico-Racial"]
-J --> L["AC4 - Comparativo PNE"]
+
+J --> L["AC4 - Comparativo de Necessidades Específicas"]
 ```
 
 ### Estrutura das Views Analíticas
@@ -363,7 +435,7 @@ J --> L["AC4 - Comparativo PNE"]
 | AC4 – Comparativo Étnico-Racial | `vw_ac4_prova_comparativo_percentual` |
 | AC4 – Comparativo de Necessidades Específicas | `vw_ac4_prova_comparativo_pne_percentual` |
 
-> A view `vw_ac4_prova_comparativo` atua como camada intermediária de consolidação dos dados, servindo de base para a geração das views percentuais utilizadas nos dashboards comparativos da AC4.
+> A view `vw_ac4_prova_comparativo` atua como camada intermediária de consolidação dos dados, servindo de base para as análises comparativas da AC4.da AC4.
 ---
 
 ## 🎯 Competências Aplicadas
