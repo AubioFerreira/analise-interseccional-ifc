@@ -1,5 +1,5 @@
 # 📊 Engenharia de Dados e Business Intelligence Aplicados à Interseccionalidade Étnico-Racial e PNE
-### Projeto Farol IFC – Módulo de Análise Étnico-Racial e Necessidades Específicas
+### Projeto Farol IFC – Módulo de Análise Étnico-Racial, Necessidades Específicas e Lacunas Informacionais
 
 Sistema de Business Intelligence para análise da composição étnico-racial, das necessidades específicas e das lacunas informacionais da comunidade acadêmica do Instituto Federal Catarinense.
 
