@@ -1,29 +1,31 @@
-# 📊 Engenharia de Dados e BI: Observatório Nzila (Extensão Portal Farol IFC)
+# 📊 Engenharia de Dados e Business Intelligence Aplicados à Interseccionalidade Étnico-Racial e PNE
+Uma Extensão do Portal Farol IFC
 
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Power_BI](https://img.shields.io/badge/PowerBI-F2C811?style=for-the-badge&logo=Power%20BI&logoColor=black)
 ![SQL](https://img.shields.io/badge/SQL-003B57?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 
-> **Objetivo Institucional:** Desenvolvimento de uma solução de Business Intelligence e estruturação de uma camada de persistência e governança de dados para o NEABI (Núcleo de Estudos Afro-Brasileiros e Indígenas). O projeto analisa de forma analítica e interseccional a comunidade acadêmica do Instituto Federal Catarinense (IFC), mitigando falhas de contaminação de contexto e evidenciando com precisão o cenário de autodeclaração étnico-racial e acessibilidade[cite: 2].
+> **Objetivo Institucional:** Desenvolvimento de uma solução de Business Intelligence e estruturação de uma camada de persistência e governança de dados para o NEABI (Núcleo de Estudos Afro-Brasileiros e Indígenas) do IFC - Campus Concórdia. O projeto analisa de forma analítica e interseccional a comunidade acadêmica do Instituto Federal Catarinense (IFC), mitigando falhas de contaminação de contexto e evidenciando com precisão o cenário de autodeclaração étnico-racial e acessibilidade.
 
 ---
 
 ## 📸 Visualização do Painel (Data Product)
 
 ### Página 1: Capa e Painel Executivo Geral
-![Capa do Dashboard](./images/dashboard_capa.png)
+![Capa do Dashboard](Imagens/1.png)
 
 ### Página 2: Perfil Étnico-Racial Discente (AC1) vs. Acessibilidade (AC2)
 <p align="center">
-  <img src="./images/dashboard_ac1.png" width="49%" />
-  <img src="./images/dashboard_ac2.png" width="49%" />
+  <img src="Imagens/2.png" width="49%" />
+  <img src="Imagens/3.png" width="49%" />
 </p>
 
 ### Página 3: Perfil dos Servidores (AC3) vs. Análise Comparativa Proporcional (AC4)
 <p align="center">
-  <img src="./images/dashboard_ac3.png" width="49%" />
-  <img src="./images/dashboard_ac4.png" width="49%" />
+  <img src="Imagens/4.png" width="49%" />
+  <img src="Imagens/5.png" width="49%" />
+  <img src="Imagens/6.png" width="49%" />
 </p>
 
 ---
