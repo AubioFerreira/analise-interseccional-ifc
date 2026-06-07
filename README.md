@@ -41,7 +41,7 @@ O projeto foi desenvolvido como atividade acadêmica aplicada a um contexto inst
 ### Página 1: Capa e Painel Executivo Geral
 ![Capa do Dashboard](Imagens/1.png)
 
-### Página 2: Perfil Étnico-Racial Discente (AC1) vs. Acessibilidade (AC2)
+### Página 2: Perfil Étnico-Racial Discente (AC1) vs. Necessidades Específicas (AC2)
 <p align="center">
   <img src="Imagens/2.png" width="49%" />
   <img src="Imagens/3.png" width="49%" />
@@ -82,7 +82,7 @@ Para facilitar a interpretação do contexto institucional e das regras de negó
 | **NEABI** | Núcleo de Estudos Afro-Brasileiros e Indígenas | Núcleo proponente responsável por formular políticas de equidade. |
 | **Discente** | Aluno Matriculado | Público-alvo das análises de diversidade e acessibilidade escolar. |
 | **Servidor** | Corpo Funcional (Docentes e Técnicos) | Analisados quanto à ocupação de cargos e preenchimento de perfil racial. |
-| **PNE** | Pessoa com Necessidade Específica | Alunos ou servidores que necessitam de atendimento especializado ou acessibilidade. |
+| **PNE** | PNE | Pessoa com Necessidade Específica | Alunos ou servidores que possuem necessidades específicas registradas nos sistemas institucionais. |
 | **TAE** | Técnico-Administrativo em Educação | Categoria funcional de servidores que atuam no suporte e gestão institucional. |
 
 ---
@@ -95,7 +95,7 @@ Para facilitar a interpretação do contexto institucional e das regras de negó
 
 * Entre os estudantes, a lacuna observada foi de **3,86%**, indicando um nível significativamente superior de preenchimento cadastral quando comparado ao quadro funcional.
 
-* Na análise de acessibilidade discente, o **Transtorno do Espectro Autista (TEA)** apresentou **202 registros**, seguido pelo **TDAH**, com **173 registros**, configurando os grupos mais frequentes dentre as necessidades específicas identificadas.
+* Na análise das necessidades específicas dos estudantes, o **Transtorno do Espectro Autista (TEA)** apresentou **202 registros**, seguido pelo **TDAH**, com **173 registros**, configurando os grupos mais frequentes dentre as necessidades específicas identificadas.
 
 ---
 
@@ -134,7 +134,7 @@ O ecossistema de dados foi estruturado seguindo as melhores práticas corporativ
 * Estruturação da tabela principal `dados_ifc_neabi`.
 * Criação da View `vw_dados_ifc_neabi` para isolamento estrito do corpo discente, corrigindo distorções históricas e garantindo cruzamentos interseccionais puros (Raça vs. PcD).
 
-### 📍 AC2: Inteligência de Acessibilidade e Neurodivergência
+### 📍 AC2: Inteligência de Necessidades Específicas e Neurodivergência
 * Desenvolvimento da View `vw_acessibilidade_final` focada exclusivamente em estudantes.
 * Implementação de mapeamento textual para geração de flags binárias indexadas para estruturação visual de condições médicas especializadas (TEA, TDAH, Altas Habilidades, Deficiências Físicas e Sensoriais).
 
@@ -194,7 +194,7 @@ FROM public.dados_ifc_neabi
 WHERE categoria = 'Discente'; 
 
 -- ============================================================================
--- ETAPA AC2: Inteligência de Acessibilidade e Neurodivergência (Estudantes)
+-- ETAPA AC2: Inteligência de Necessidades Específicas e Neurodivergência
 -- ============================================================================
 DROP VIEW IF EXISTS public.vw_acessibilidade_final CASCADE;
 
@@ -334,25 +334,36 @@ O diagrama abaixo apresenta o fluxo de processamento dos dados desde a base prin
 ```mermaid
 graph TD
 
-A["BASE PRINCIPAL<br>dados_ifc_neabi"]
+A["dados_ifc_neabi"]
 
-A --> B["AC1<br>Perfil Discente"]
+A --> B["vw_dados_ifc_neabi"]
+A --> C["vw_acessibilidade_final"]
+A --> D["vw_ac3_servidores_interseccional"]
+A --> E["vw_ac4_prova_comparativo"]
 
-A --> C["AC2<br>Acessibilidade Discente"]
+B --> F["AC1 - Perfil Discente"]
+C --> G["AC2 - Necessidades Específicas"]
+D --> H["AC3 - Servidores"]
 
-A --> D["AC3<br>Servidores"]
+E --> I["vw_ac4_prova_comparativo_percentual"]
+E --> J["vw_ac4_prova_comparativo_pne_percentual"]
 
-A --> E["AC4<br>Comparativo Racial"]
-
-A --> F["AC4<br>Comparativo PNE"]
+I --> K["AC4 - Comparativo Étnico-Racial"]
+J --> L["AC4 - Comparativo PNE"]
 ```
 
-**AC1:** vw_dados_ifc_neabi  
-**AC2:** vw_acessibilidade_final  
-**AC3:** vw_ac3_servidores_interseccional  
-**AC4:** vw_ac4_prova_comparativo_percentual  
-**AC4:** vw_ac4_prova_comparativo_pne_percentual
+### Estrutura das Views Analíticas
 
+| Etapa | View |
+|--------|--------|
+| AC1 – Perfil Discente | `vw_dados_ifc_neabi` |
+| AC2 – Necessidades Específicas | `vw_acessibilidade_final` |
+| AC3 – Perfil dos Servidores | `vw_ac3_servidores_interseccional` |
+| AC4 – Consolidação Comparativa | `vw_ac4_prova_comparativo` |
+| AC4 – Comparativo Étnico-Racial | `vw_ac4_prova_comparativo_percentual` |
+| AC4 – Comparativo de Necessidades Específicas | `vw_ac4_prova_comparativo_pne_percentual` |
+
+> A view `vw_ac4_prova_comparativo` atua como camada intermediária de consolidação dos dados, servindo de base para a geração das views percentuais utilizadas nos dashboards comparativos da AC4.
 ---
 
 ## 🎯 Competências Aplicadas
