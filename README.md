@@ -3,8 +3,55 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Power_BI](https://img.shields.io/badge/PowerBI-F2C811?style=for-the-badge&logo=Power%20BI&logoColor=black)
 ![SQL](https://img.shields.io/badge/SQL-003B57?style=for-the-badge&logo=postgresql&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 
-> **Objetivo Institucional:** Solução de Business Intelligence e criação de uma camada de persistência de dados para o NEABI. O projeto analisa a comunidade acadêmica do Instituto Federal Catarinense (IFC), evidenciando o apagamento de dados de autodeclaração étnico-racial no quadro funcional, contrastando-o com a diversidade discente.
+> **Objetivo Institucional:** Desenvolvimento de uma solução de Business Intelligence e estruturação de uma camada de persistência e governança de dados para o NEABI (Núcleo de Estudos Afro-Brasileiros e Indígenas). O projeto analisa de forma analítica e interseccional a comunidade acadêmica do Instituto Federal Catarinense (IFC), mitigando falhas de contaminação de contexto e evidenciando com precisão o cenário de autodeclaração étnico-racial e acessibilidade[cite: 2].
+
+---
+
+## 📸 Visualização do Painel (Data Product)
+
+### Página 1: Capa e Painel Executivo Geral
+![Capa do Dashboard](./images/dashboard_capa.png)
+
+### Página 2: Perfil Étnico-Racial Discente (AC1) vs. Acessibilidade (AC2)
+<p align="center">
+  <img src="./images/dashboard_ac1.png" width="49%" />
+  <img src="./images/dashboard_ac2.png" width="49%" />
+</p>
+
+### Página 3: Perfil dos Servidores (AC3) vs. Análise Comparativa Proporcional (AC4)
+<p align="center">
+  <img src="./images/dashboard_ac3.png" width="49%" />
+  <img src="./images/dashboard_ac4.png" width="49%" />
+</p>
+
+---
+
+## 📖 Glossário de Termos Institucionais
+
+Para facilitar a interpretação do contexto institucional e das regras de negócio aplicadas ao pipeline, utiliza-se o seguinte mapeamento de acrônimos:
+
+| Acrônimo / Termo | Significado Institucional | Contexto no Projeto |
+| :--- | :--- | :--- |
+| **IFC** | Instituto Federal Catarinense | Autarquia federal de ensino foco da análise de dados[cite: 2]. |
+| **NEABI** | Núcleo de Estudos Afro-Brasileiros e Indígenas | Núcleo proponente responsável por formular políticas de equidade[cite: 2]. |
+| **Discente** | Aluno Matriculado | Público-alvo das análises de diversidade e acessibilidade escolar[cite: 2]. |
+| **Servidor** | Corpo Funcional (Docentes e Técnicos) | Analisados quanto à ocupação de cargos e preenchimento de perfil racial[cite: 2]. |
+| **PNE** | Pessoa com Necessidade Específica | Alunos ou servidores que necessitam de atendimento especializado ou acessibilidade[cite: 2]. |
+| **TAE** | Técnico-Administrativo em Educação | Categoria funcional de servidores que atuam no suporte e gestão institucional[cite: 2]. |
+
+---
+
+## 📈 Descobertas Analíticas Estratégicas (Data Insights)
+
+A engenharia de dados aplicada na unificação das fontes permitiu extrair métricas cruciais sobre a realidade da instituição:
+
+* **A Lacuna Crítica no Quadro Funcional:** Foi identificada uma severa lacuna de autodeclaração racial entre os servidores do IFC, totalizando **89,73% de registros sem informação** (`Não Declarado`), o que representa 1.756 servidores funcionais fora do mapeamento de diversidade[cite: 2].
+* **Contraste de Autodeclaração (Alunos vs. Servidores):** Enquanto o corpo discente apresenta um excelente índice de preenchimento, com apenas **3,86% de lacuna racial**, o corpo de servidores perpetua uma ausência crônica de dados, inviabilizando análises de representatividade robustas para o comitê do NEABI[cite: 2].
+* **Mapeamento de Neurodivergências Discentes:** Com a separação rigorosa de contextos promovida na AC2, identificou-se que o Transtorno do Espectro Autista (**TEA**) lidera as notificações de acessibilidade estudantil com **202 registros**, seguido de perto por **173 casos de TDAH**, direcionando de forma assertiva onde a reitoria deve aplicar os recursos de inclusão[cite: 2].
+
+---
 
 ## 🔗 Artefatos do Projeto
 
@@ -13,81 +60,92 @@
 * 💾 **Scripts SQL:** [Acessar códigos de criação das Views e ETL](https://github.com/AubioFerreira/analise-interseccional-ifc/blob/main/script_banco_dados.sql)
 * 📊 **Dashboard BI:** [Baixar o arquivo Power BI (.pbix)](https://github.com/AubioFerreira/analise-interseccional-ifc/blob/main/Dashboard_NEABI_IFC_v1.pbix)
 * 📄 **Documentação:** [Ler o Relatório Final em PDF](./caminho-do-relatorio.pdf)
+
 ---
 
 ## 1. Arquitetura de Dados e Pipeline ETL
 
-O pipeline foi construído seguindo o padrão ouro de extração, transformação e carga (ETL):
-* **Ingestão (Extract):** Carga de dados brutos institucionais (17.953 registros) via arquivos CSV com sanitização de dados sensíveis (LGPD).
-* **Transformação (Transform):** Higienização e criação de Views no PostgreSQL 17. Uso de `COALESCE` para tratamento de nulos, `ILIKE` para text mining de comorbidades e `CASE WHEN` para super-agrupamentos.
-* **Carga (Load):** Conexão direta `localhost` e modelagem relacional (Muitos para Muitos) no Power BI.
+O ecossistema de dados foi estruturado seguindo as melhores práticas corporativas para garantir governança e escalabilidade:
+* **Ingestão (Extract):** Processamento de dados brutos institucionais (17.953 registros) via arquivos CSV higienizados em conformidade com as diretrizes da LGPD[cite: 2].
+* **Transformação (Transform):** Higienização avançada e tratamento de concorrência estrutural no PostgreSQL 17. Uso de `COALESCE` para tratamento de nulos, operadores de busca textual flexíveis (`ILIKE`) para *text mining* e tratamento de comorbidades, e **Window Functions (`OVER PARTITION BY`)** para realizar cálculos percentuais dinâmicos diretamente na fonte[cite: 2].
+* **Carga (Load):** Conexão nativa e otimizada via Power BI, consumindo dados pré-calculados pelo banco de dados. Essa arquitetura zera o *overhead* de processamento no *frontend*, substituindo medidas DAX complexas por leitura de colunas prontas.
 
 ---
 
-## 2. A Jornada do Projeto: Entregas por Etapa (ACs)
+## 2. A Jornada Iterativa (Entregas por Etapa)
 
-O ecossistema foi construído de forma iterativa, consolidando a fonte única da verdade no banco de dados:
-
-### 📍 AC1: Camada de Persistência e Interseccionalidade
-* Criação da tabela principal `dados_ifc_neabi`.
-* Elaboração de consultas interseccionais avançadas (ex: mapeamento simultâneo de alunos Pretos/Pardos que também são PcD), entregando uma inteligência que o portal Farol original não possui de forma direta.
+### 📍 AC1: Camada de Persistência e Isolamento Discente
+* Estruturação da tabela principal `dados_ifc_neabi`[cite: 2].
+* Criação da View `vw_dados_ifc_neabi` para isolamento estrito do corpo discente, corrigindo distorções históricas e garantindo cruzamentos interseccionais puros (Raça vs. PcD)[cite: 2].
 
 ### 📍 AC2: Inteligência de Acessibilidade e Neurodivergência
-* Criação da View `vw_acessibilidade_final`.
-* Varredura textual para mapear as necessidades específicas e geração de flags binárias para estruturação visual de comorbidades (TEA, TDAH, Altas Habilidades, etc.).
+* Desenvolvimento da View `vw_acessibilidade_final` focada exclusivamente em estudantes[cite: 2].
+* Implementação de mapeamento textual para geração de flags binárias indexadas para estruturação visual de condições médicas especializadas (TEA, TDAH, Altas Habilidades, Deficiências Físicas e Sensoriais)[cite: 2].
 
-### 📍 AC3: Interseccionalidade Funcional e Auditoria de Dados
-* Criação de duas Views focadas no corpo de servidores: `vw_ac3_final_servidores` e `vw_ac3_servidores_interseccional`.
-* Auditoria oficial que comprovou **100% de ausência de autodeclaração racial** ("Não Informado") entre servidores.
-* Tratamento de agrupamento étnico (aglutinando Pretos e Pardos) e tratamento de nulos em necessidades especiais.
+### 📍 AC3: Interseccionalidade Funcional e Homologação de Dados
+* Criação da View especializada `vw_ac3_servidores_interseccional` focada estritamente no corpo funcional[cite: 2].
+* Implementação de lógica defensiva contra nulos (`OR cor_raca IS NULL`) para blindagem de cargas futuras e consolidação do agrupamento étnico-racial unificado (`grupo_etnico`)[cite: 2].
 
-### 📍 AC4 (Prova Final): Comparativo de Diversidade e Refatoração UI/UX
-* Criação da View `vw_ac4_prova_comparativo`.
-* Super-agrupamento de categorias para viabilizar o cruzamento visual entre "Servidores" e "Alunos".
-* Refatoração do dashboard em 4 páginas independentes com segmentadores nativos e design system responsivo.
+### 📍 AC4 (Prova Final): Visões Comparativas Proporcionais e Performance
+* Criação das Views agregadas `vw_ac4_prova_comparativo_percentual` e `vw_ac4_prova_comparativo_pne_percentual`[cite: 2].
+* Utilização de funções de janela analíticas do SQL para calcular a distribuição percentual interna de cada campus por categoria, entregando um painel executivo responsivo de alta performance[cite: 2].
 
 ---
 
-## 3. Procedimentos de Execução (Script Master)
+## 🛠️ Pré-requisitos e Como Executar
 
-Abaixo, o roteiro completo de banco de dados (Single Source of Truth) para reprodução de toda a infraestrutura do projeto no PostgreSQL:
+Para reproduzir localmente este projeto de forma íntegra, siga as etapas abaixo:
+
+1. **Banco de Dados:** Ter o PostgreSQL 17 (ou superior) instalado e rodando localmente na porta padrão (`5432`).
+2. **Visualização:** Possuir o Microsoft Power BI Desktop instalado na máquina.
+3. **Instalação:**
+   * Crie um banco de dados vazio chamado `dados_ifc_neabi`.
+   * Execute o script consolidado abaixo para gerar as tabelas, importar seus dados brutos de CSV e criar todas as camadas analíticas automatizadas.
+   * Abra o arquivo `.pbix` no Power BI e atualize a credencial de banco de dados apontando para o seu `localhost`.
+
+---
+
+## 3. Script Master Consolidado (Single Source of Truth)
 
 ```sql
--- ==========================================================
--- PROJETO: Análise Interseccional de Dados Institucionais - IFC
--- OBJETIVO: Criação da camada de persistência para o NEABI
+-- ============================================================================
+-- SCRIPT MASTER: INFRAESTRUTURA DE DADOS - OBSERVATÓRIO NZILA
+-- OBJETIVO: Criação, saneamento e consolidação das camadas analíticas (AC1 a AC4)
 -- BANCO DE DADOS: PostgreSQL 17
--- DATA: Março de 2026
--- ==========================================================
+-- ============================================================================
 
--- 1. Criação da tabela para armazenamento dos dados institucionais
-CREATE TABLE dados_ifc_neabi (
+-- ----------------------------------------------------------------------------
+-- TABELA PRINCIPAL: Ingestão Bruta
+-- ----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS public.dados_ifc_neabi (
     id SERIAL PRIMARY KEY,
     campus VARCHAR(100),
     categoria VARCHAR(50), 
     cor_raca VARCHAR(50),
-    possui_necessidade_especial VARCHAR(10) 
+    possui_need_especial VARCHAR(50),
+    necessidades_especiais TEXT,
+    dt_carga TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 2. Comando para conferência da carga de dados
-SELECT * FROM dados_ifc_neabi;
+-- ============================================================================
+-- ETAPA AC1: Visão Filtrada do Corpo Discente
+-- ============================================================================
+DROP VIEW IF EXISTS public.vw_dados_ifc_neabi CASCADE;
 
--- 3. Exemplo de consulta para análise interseccional (Pretos/Pardos e PcD)
-SELECT campus, cor_raca, possui_necessidade_especial, COUNT(*) as total
-FROM dados_ifc_neabi
-WHERE cor_raca IN ('Preta', 'Parda') 
-  AND possui_necessidade_especial = 'Sim'
-GROUP BY campus, cor_raca, possui_necessidade_especial
-ORDER BY total DESC;
+CREATE VIEW public.vw_dados_ifc_neabi AS
+SELECT *
+FROM public.dados_ifc_neabi
+WHERE categoria = 'Discente'; 
 
--- ==========================================================
--- ETAPA AC2: Inteligência de Acessibilidade e Neurodivergência
--- OBJETIVO: View para tratamento de comorbidades e flags binárias
--- ==========================================================
+-- ============================================================================
+-- ETAPA AC2: Inteligência de Acessibilidade e Neurodivergência (Estudantes)
+-- ============================================================================
+DROP VIEW IF EXISTS public.vw_acessibilidade_final CASCADE;
 
-CREATE OR REPLACE VIEW vw_acessibilidade_final AS
+CREATE VIEW public.vw_acessibilidade_final AS
 SELECT 
     *,
+    -- Criação de Flags Binárias para contabilização de comorbidades
     CASE WHEN necessidades_especiais ILIKE '%TEA%' OR necessidades_especiais ILIKE '%AUTIS%' THEN 1 ELSE 0 END AS flag_tea,
     CASE WHEN necessidades_especiais ILIKE '%TDAH%' THEN 1 ELSE 0 END AS flag_tdah,
     CASE WHEN necessidades_especiais ILIKE '%VISUAL%' THEN 1 ELSE 0 END AS flag_visual,
@@ -96,6 +154,7 @@ SELECT
     CASE WHEN necessidades_especiais ILIKE '%INTELECTUAL%' THEN 1 ELSE 0 END AS flag_intelectual,
     CASE WHEN necessidades_especiais ILIKE '%ALTAS HABILIDADES%' OR necessidades_especiais ILIKE '%SUPERDOT%' THEN 1 ELSE 0 END AS flag_superdotacao,
     
+    -- Classificação da Necessidade Principal para engenharia visual
     CASE 
         WHEN necessidades_especiais ILIKE '%TEA%' OR necessidades_especiais ILIKE '%AUTIS%' THEN 'TEA (Autismo)'
         WHEN necessidades_especiais ILIKE '%TDAH%' THEN 'TDAH'
@@ -107,74 +166,104 @@ SELECT
         WHEN necessidades_especiais IS NULL OR necessidades_especiais = '[null]' THEN 'Não Possui'
         ELSE 'Outras Necessidades'
     END AS necessidade_principal
-FROM public.dados_ifc_neabi;
-
--- ==========================================================
--- ETAPA AC3: Interseccionalidade Funcional e Auditoria de Dados
--- OBJETIVO: Views para análise de servidores (Docentes e Técnicos)
--- ==========================================================
-
--- 1. Limpeza de segurança para renovação da estrutura
-DROP VIEW IF EXISTS vw_ac3_final_servidores CASCADE;
-DROP VIEW IF EXISTS vw_ac3_servidores_interseccional CASCADE;
-
--- 2. Criação da View especializada para auditoria do NEABI
-CREATE VIEW vw_ac3_final_servidores AS
-SELECT 
-    campus, 
-    categoria, 
-    COALESCE(cor_raca, 'Não Declarado') as cor_raca
 FROM public.dados_ifc_neabi
-WHERE categoria IN ('Docente', 'Técnico Administrativo');
+WHERE categoria ILIKE '%Disc%' 
+   OR categoria ILIKE '%Alun%' 
+   OR categoria ILIKE '%Estud%';
 
--- 3. Criação da View para análise interseccional de Servidores
-CREATE VIEW vw_ac3_servidores_interseccional AS
-SELECT 
+-- ============================================================================
+-- ETAPA AC3: SERVIDORES - PERFIL RACIAL E INTERSECCIONALIDADE
+-- ============================================================================
+DROP VIEW IF EXISTS public.vw_ac3_servidores_interseccional CASCADE;
+
+CREATE VIEW public.vw_ac3_servidores_interseccional AS
+SELECT
     campus,
-    categoria, 
-    COALESCE(cor_raca, 'Não Declarado') as cor_raca,
-    COALESCE(possui_necessidade_especial, 'Não Informado') as possui_necessidade_especial,
-    CASE 
+    categoria,
+
+    -- Tratamento preventivo de strings nulas
+    COALESCE(cor_raca, 'Não Declarado') AS cor_raca,
+    COALESCE(possui_necessidade_especial, 'Não Informado') AS possui_necessidade_especial,
+
+    -- Agrupamento Étnico-Racial com blindagem contra herança de NULLs
+    CASE
         WHEN cor_raca IN ('Preta', 'Parda') THEN 'Negros (Pretos/Pardos)'
-        WHEN cor_raca IS NULL OR cor_raca = 'Não Declarado' THEN 'Não Declarado'
-        ELSE cor_raca 
+        WHEN cor_raca = 'Branca' THEN 'Branca'
+        WHEN cor_raca = 'Indígena' THEN 'Indígena'
+        WHEN cor_raca = 'Amarela (de origem oriental)' THEN 'Amarela'
+        WHEN cor_raca IN ('Não Informado', 'Não declarada', 'Não Declarado') OR cor_raca IS NULL THEN 'Não Declarado'
+        ELSE 'Outros'
     END AS grupo_etnico
 FROM public.dados_ifc_neabi
-WHERE categoria IN ('Docente', 'Técnico');
+WHERE categoria IN ('Docente', 'Técnico', 'Técnico Administrativo');
 
--- 4. Validação dos dados de auditoria racial (100% ausência)
-SELECT 
-    cor_raca, 
-    COUNT(*) as total,
-    ROUND((COUNT(*) * 100.0 / SUM(COUNT(*)) OVER()), 2) as percentual
-FROM vw_ac3_final_servidores
-GROUP BY cor_raca;
+-- ============================================================================
+-- ETAPA AC4: VIEWS COMPARATIVAS INSTITUCIONAIS (PERCENTUALIZADAS)
+-- ============================================================================
 
--- ==========================================================
--- ETAPA AC4 (PROVA FINAL): Comparativo de Diversidade
--- OBJETIVO: View para cruzar o perfil de Alunos vs Servidores
--- ==========================================================
+-- 1. View Comparativa Étnico-Racial
+DROP VIEW IF EXISTS public.vw_ac4_prova_comparativo_percentual CASCADE;
 
--- 1. Limpeza de segurança
-DROP VIEW IF EXISTS vw_ac4_prova_comparativo CASCADE;
-
--- 2. Criação da View de cruzamento (Discentes vs Servidores)
-CREATE VIEW vw_ac4_prova_comparativo AS
-SELECT 
+CREATE VIEW public.vw_ac4_prova_comparativo_percentual AS
+WITH dados_consolidados AS (
+    SELECT
+        campus,
+        CASE
+            WHEN categoria IN ('Docente', 'Técnico Administrativo', 'Técnico') THEN 'Servidor (Docente/Técnico)'
+            WHEN categoria = 'Discente' THEN 'Aluno (Discente)'
+            ELSE 'Outros'
+        END AS group_comunidade,
+        CASE
+            WHEN cor_raca IN ('Preta', 'Parda') THEN 'Negros (Pretos/Pardos)'
+            WHEN cor_raca = 'Branca' THEN 'Branca'
+            WHEN cor_raca = 'Indígena' THEN 'Indígena'
+            WHEN cor_raca = 'Amarela (de origem oriental)' THEN 'Amarela'
+            WHEN cor_raca IN ('Não Informado', 'Não declarada', 'Não Declarado') OR cor_raca IS NULL THEN 'Não Declarado'
+            ELSE 'Outros'
+        END AS grupo_etnico,
+        COUNT(*) AS total_pessoas
+    FROM public.dados_ifc_neabi
+    GROUP BY campus, 2, 3
+)
+SELECT
     campus,
-    CASE 
-        WHEN categoria IN ('Docente', 'Técnico Administrativo', 'Técnico') THEN 'Servidor (Docente/Técnico)'
-        WHEN categoria = 'Discente' THEN 'Aluno (Discente)'
-        ELSE 'Outros'
-    END AS grupo_comunidade,
-    COALESCE(cor_raca, 'Não Declarado') AS cor_raca,
-    COUNT(*) as total_pessoas
-FROM public.dados_ifc_neabi
-GROUP BY 
+    group_comunidade,
+    grupo_etnico,
+    total_pessoas,
+    -- Window Function para cálculo proporcional dinâmico na fonte
+    ROUND(
+        (total_pessoas::numeric / SUM(total_pessoas) OVER (PARTITION BY campus, group_comunidade)) * 100, 2
+    ) AS percentual_grupo
+FROM dados_consolidados;
+
+-- 2. View Comparativa de Acessibilidade (PNE)
+DROP VIEW IF EXISTS public.vw_ac4_prova_comparativo_pne_percentual CASCADE;
+
+CREATE VIEW public.vw_ac4_prova_comparativo_pne_percentual AS
+WITH dados_consolidados AS (
+    SELECT
+        campus,
+        CASE
+            WHEN categoria IN ('Docente', 'Técnico Administrativo', 'Técnico') THEN 'Servidor (Docente/Técnico)'
+            WHEN categoria = 'Discente' THEN 'Aluno (Discente)'
+            ELSE 'Outros'
+        END AS group_comunidade,
+        CASE 
+            WHEN possui_necessidade_especial = 'Sim' THEN 'Possui PNE'
+            WHEN possui_necessidade_especial = 'Não' THEN 'Não Possui PNE'
+            ELSE 'Não Informado'
+        END AS status_pne,
+        COUNT(*) AS total_pessoas
+    FROM public.dados_ifc_neabi
+    GROUP BY campus, 2, 3
+)
+SELECT
     campus,
-    CASE 
-        WHEN categoria IN ('Docente', 'Técnico Administrativo', 'Técnico') THEN 'Servidor (Docente/Técnico)'
-        WHEN categoria = 'Discente' THEN 'Aluno (Discente)'
-        ELSE 'Outros'
-    END,
-    COALESCE(cor_raca, 'Não Declarado');
+    grupo_comunidade,
+    status_pne,
+    total_pessoas,
+    -- Window Function para cálculo proporcional analítico por categoria e campus
+    ROUND(
+        (total_pessoas::numeric / SUM(total_pessoas) OVER (PARTITION BY campus, group_comunidade)) * 100, 2
+    ) AS percentual_grupo
+FROM dados_consolidados;
