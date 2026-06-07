@@ -1,5 +1,5 @@
 # 📊 Engenharia de Dados e Business Intelligence Aplicados à Interseccionalidade Étnico-Racial e PNE
-Uma Extensão do Portal Farol IFC
+### Projeto Farol IFC – Módulo de Análise Étnico-Racial e Acessibilidade
 
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Power_BI](https://img.shields.io/badge/PowerBI-F2C811?style=for-the-badge&logo=Power%20BI&logoColor=black)
@@ -7,6 +7,30 @@ Uma Extensão do Portal Farol IFC
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 
 > **Objetivo Institucional:** Desenvolvimento de uma solução de Business Intelligence e estruturação de uma camada de persistência e governança de dados para o NEABI (Núcleo de Estudos Afro-Brasileiros e Indígenas) do IFC - Campus Concórdia. O projeto analisa de forma analítica e interseccional a comunidade acadêmica do Instituto Federal Catarinense (IFC), mitigando falhas de contaminação de contexto e evidenciando com precisão o cenário de autodeclaração étnico-racial e acessibilidade.
+
+---
+
+## 📌 Resumo Executivo
+
+O Farol IFC é uma solução de Business Intelligence desenvolvida para apoiar a análise da composição étnico-racial e dos indicadores de acessibilidade da comunidade acadêmica do Instituto Federal Catarinense (IFC).
+
+A partir da aplicação de técnicas de Engenharia de Dados, SQL e Power BI, foram construídas camadas analíticas capazes de identificar padrões de autodeclaração racial, lacunas informacionais, distribuição de pessoas com necessidades específicas e diferenças entre estudantes e servidores.
+
+O projeto foi desenvolvido como atividade acadêmica aplicada a um contexto institucional real, utilizando dados anonimizados e respeitando os princípios da Lei Geral de Proteção de Dados (LGPD).
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+| Tecnologia | Finalidade |
+|------------|------------|
+| PostgreSQL 17 | Armazenamento e processamento dos dados |
+| SQL | Transformação e consolidação das informações |
+| Power BI | Construção dos dashboards e indicadores |
+| Git | Controle de versão |
+| GitHub | Hospedagem e documentação do projeto |
+| Draw.io | Modelagem de dados (MER) |
+| Mermaid | Representação de diagramas e arquitetura |
 
 ---
 
@@ -30,6 +54,22 @@ Uma Extensão do Portal Farol IFC
 
 ---
 
+## 📐 Modelo Entidade-Relacionamento (MER)
+
+O modelo abaixo representa a estrutura lógica dos dados utilizada para organizar as informações analisadas no projeto.
+
+![MER](MER.png)
+
+### Estrutura do Modelo
+
+A entidade central é `DADOS_IFC_NEABI`, responsável por armazenar os registros da comunidade acadêmica.
+
+As entidades `DIM_CAMPUS`, `DIM_CATEGORIA`, `DIM_COR_RACA` e `DIM_NECESSIDADE_ESPECIAL` representam dimensões utilizadas para classificação e segmentação dos dados.
+
+Todos os relacionamentos possuem cardinalidade **1:N**, indicando que um mesmo campus, categoria, grupo racial ou necessidade especial pode estar associado a diversos registros da base principal.
+
+---
+
 ## 📖 Glossário de Termos Institucionais
 
 Para facilitar a interpretação do contexto institucional e das regras de negócio aplicadas ao pipeline, utiliza-se o seguinte mapeamento de acrônimos:
@@ -47,11 +87,13 @@ Para facilitar a interpretação do contexto institucional e das regras de negó
 
 ## 📈 Descobertas Analíticas Estratégicas (Data Insights)
 
-A engenharia de dados aplicada na unificação das fontes permitiu extrair métricas cruciais sobre a realidade da instituição:
+### Principais Resultados
 
-* **A Lacuna Crítica no Quadro Funcional:** Foi identificada uma severa lacuna de autodeclaração racial entre os servidores do IFC, totalizando **89,73% de registros sem informação** (`Não Declarado`), o que representa 1.756 servidores funcionais fora do mapeamento de diversidade.
-* **Contraste de Autodeclaração (Alunos vs. Servidores):** Enquanto o corpo discente apresenta um excelente índice de preenchimento, com apenas **3,86% de lacuna racial**, o corpo de servidores perpetua uma ausência crônica de dados, inviabilizando análises de representatividade robustas para o comitê do NEABI.
-* **Mapeamento de Neurodivergências Discentes:** Com a separação rigorosa de contextos promovida na AC2, identificou-se que o Transtorno do Espectro Autista (**TEA**) lidera as notificações de acessibilidade estudantil com **202 registros**, seguido de perto por **173 casos de TDAH**, direcionando de forma assertiva onde a reitoria deve aplicar os recursos de inclusão.
+* Foi identificada uma lacuna informacional de **89,73%** nos registros raciais dos servidores do IFC, totalizando aproximadamente **1.756 registros sem informação racial disponível**.
+
+* Entre os estudantes, a lacuna observada foi de **3,86%**, indicando um nível significativamente superior de preenchimento cadastral quando comparado ao quadro funcional.
+
+* Na análise de acessibilidade discente, o **Transtorno do Espectro Autista (TEA)** apresentou **202 registros**, seguido pelo **TDAH**, com **173 registros**, configurando os grupos mais frequentes dentre as necessidades específicas identificadas.
 
 ---
 
@@ -68,7 +110,7 @@ Dessa forma, indicadores de representatividade podem estar sujeitos a limitaçõ
 ## 🔗 Artefatos do Projeto
 
 * 📋 **Gestão Ágil (Kanban):** [Acessar o Quadro do Projeto](https://github.com/users/AubioFerreira/projects/2)
-* 📐 **Modelagem de Dados:** [Visualizar o Diagrama (MER)](https://github.com/AubioFerreira/analise-interseccional-ifc/blob/main/MER.drawio.png)
+* 📐 **Modelagem de Dados:** [Visualizar o Diagrama (MER)](https://github.com/AubioFerreira/analise-interseccional-ifc/blob/main/MER.png)
 * 💾 **Scripts SQL:** [Acessar códigos de criação das Views e ETL](https://github.com/AubioFerreira/analise-interseccional-ifc/blob/main/script_banco_dados.sql)
 * 📊 **Dashboard BI:** [Baixar o arquivo Power BI (.pbix)](https://github.com/AubioFerreira/analise-interseccional-ifc/blob/main/Dashboard_NEABI_IFC_v1.pbix)
 * 📄 **Documentação:** [Ler o Relatório Final em PDF](./caminho-do-relatorio.pdf)
@@ -80,7 +122,7 @@ Dessa forma, indicadores de representatividade podem estar sujeitos a limitaçõ
 O ecossistema de dados foi estruturado seguindo as melhores práticas corporativas para garantir governança e escalabilidade:
 * **Ingestão (Extract):** Processamento de dados brutos institucionais (17.953 registros) via arquivos CSV higienizados em conformidade com as diretrizes da LGPD.
 * **Transformação (Transform):** Higienização avançada e tratamento de concorrência estrutural no PostgreSQL 17. Uso de `COALESCE` para tratamento de nulos, operadores de busca textual flexíveis (`ILIKE`) para *text mining* e tratamento de comorbidades, e **Window Functions (`OVER PARTITION BY`)** para realizar cálculos percentuais dinâmicos diretamente na fonte.
-* **Carga (Load):** Conexão nativa e otimizada via Power BI, consumindo dados pré-calculados pelo banco de dados. Essa arquitetura zera o *overhead* de processamento no *frontend*, substituindo medidas DAX complexas por leitura de colunas prontas.
+* **Carga (Load):** Conexão nativa e otimizada via Power BI, consumindo dados pré-calculados pelo banco de dados. Essa arquitetura reduz significativamente o processamento necessário no Power BI, transferindo parte das regras de negócio e cálculos para o PostgreSQL, favorecendo desempenho, rastreabilidade e governança dos dados.
 
 ---
 
@@ -279,23 +321,57 @@ SELECT
         (total_pessoas::numeric / SUM(total_pessoas) OVER (PARTITION BY campus, group_comunidade)) * 100, 2
     ) AS percentual_grupo
 FROM dados_consolidados;
+```
 
 ---
+
+## 🏗️ Arquitetura Analítica do Projeto
+
+O diagrama abaixo apresenta o fluxo de processamento dos dados desde a base principal até as camadas analíticas utilizadas na construção dos dashboards e indicadores.
 
 ```mermaid
 graph TD
 
-A[dados_ifc_neabi]
+A["BASE PRINCIPAL<br>dados_ifc_neabi"]
 
-A --> B[vw_dados_ifc_neabi]
-A --> C[vw_acessibilidade_final]
-A --> D[vw_ac3_servidores_interseccional]
-A --> E[vw_ac4_prova_comparativo_percentual]
-A --> F[vw_ac4_prova_comparativo_pne_percentual]
+A --> B["AC1<br>Perfil Discente"]
 
-B --> G[AC1 - Perfil Discente]
-C --> H[AC2 - Acessibilidade]
-D --> I[AC3 - Servidores]
-E --> J[AC4 - Comparativo Racial]
-F --> K[AC4 - Comparativo PNE]
+A --> C["AC2<br>Acessibilidade Discente"]
+
+A --> D["AC3<br>Servidores"]
+
+A --> E["AC4<br>Comparativo Racial"]
+
+A --> F["AC4<br>Comparativo PNE"]
 ```
+
+**AC1:** vw_dados_ifc_neabi  
+**AC2:** vw_acessibilidade_final  
+**AC3:** vw_ac3_servidores_interseccional  
+**AC4:** vw_ac4_prova_comparativo_percentual  
+**AC4:** vw_ac4_prova_comparativo_pne_percentual
+
+---
+
+## 🎯 Competências Aplicadas
+
+- Engenharia de Dados
+- SQL Avançado
+- PostgreSQL
+- Modelagem de Dados
+- ETL
+- Business Intelligence
+- Power BI
+- Governança de Dados
+- Visualização de Dados
+- Controle de Versão com Git e GitHub
+
+---
+
+## 📌 Conclusão
+
+O projeto demonstrou a aplicação prática de conceitos de Engenharia de Dados e Business Intelligence em um contexto institucional real.
+
+Por meio da utilização de PostgreSQL, SQL e Power BI, foi possível estruturar um ambiente analítico capaz de apoiar discussões relacionadas à diversidade étnico-racial, acessibilidade e qualidade dos registros institucionais.
+
+Os resultados produzidos podem servir como subsídio para ações de gestão, planejamento institucional e fortalecimento das políticas de inclusão do Instituto Federal Catarinense.
