@@ -26,7 +26,7 @@ O projeto foi desenvolvido como atividade acadêmica aplicada a um contexto inst
 
 | Tecnologia | Finalidade |
 |------------|------------|
-| PostgreSQL 17 | Armazenamento e processamento dos dados |
+| PostgreSQL 18.3 | Armazenamento e processamento dos dados |
 | SQL | Transformação e consolidação das informações |
 | Power BI | Construção dos dashboards e indicadores |
 | Git | Controle de versão |
@@ -123,7 +123,7 @@ Dessa forma, indicadores de representatividade podem estar sujeitos a limitaçõ
 
 O ecossistema de dados foi estruturado seguindo as melhores práticas corporativas para garantir governança e escalabilidade:
 * **Ingestão (Extract):** Processamento de dados brutos institucionais (17.953 registros) via arquivos CSV higienizados em conformidade com as diretrizes da LGPD.
-* **Transformação (Transform):** Higienização avançada e tratamento de concorrência estrutural no PostgreSQL 17. Uso de `COALESCE` para tratamento de nulos, operadores de busca textual flexíveis (`ILIKE`) para *text mining* e tratamento de comorbidades, e **Window Functions (`OVER PARTITION BY`)** para realizar cálculos percentuais dinâmicos diretamente na fonte.
+* **Transformação (Transform):** Higienização avançada e tratamento de concorrência estrutural no PostgreSQL 18.3. Uso de `COALESCE` para tratamento de nulos, operadores de busca textual flexíveis (`ILIKE`) para *text mining* e tratamento de comorbidades, e **Window Functions (`OVER PARTITION BY`)** para realizar cálculos percentuais dinâmicos diretamente na fonte.
 * **Carga (Load):** Conexão nativa e otimizada via Power BI, consumindo dados pré-calculados pelo banco de dados. Essa arquitetura reduz significativamente o processamento necessário no Power BI, transferindo parte das regras de negócio e cálculos para o PostgreSQL, favorecendo desempenho, rastreabilidade e governança dos dados.
 
 ---
@@ -154,7 +154,7 @@ O ecossistema de dados foi estruturado seguindo as melhores práticas corporativ
 
 Para reproduzir localmente este projeto de forma íntegra, siga as etapas abaixo:
 
-1. **Banco de Dados:** Ter o PostgreSQL 17 (ou superior) instalado e rodando localmente na porta padrão (`5432`).
+1. **Banco de Dados:** Ter o PostgreSQL 18.3 (ou superior) instalado e rodando localmente na porta padrão (`5432`).
 2. **Visualização:** Possuir o Microsoft Power BI Desktop instalado na máquina.
 3. **Instalação:**
    * Crie um banco de dados vazio chamado `dados_ifc_neabi`.
@@ -169,7 +169,7 @@ Para reproduzir localmente este projeto de forma íntegra, siga as etapas abaixo
 -- ============================================================================
 -- SCRIPT MASTER: INFRAESTRUTURA DE DADOS - OBSERVATÓRIO NZILA
 -- OBJETIVO: Criação, saneamento e consolidação das camadas analíticas (AC1 a AC4)
--- BANCO DE DADOS: PostgreSQL 17
+-- BANCO DE DADOS: PostgreSQL 18.3
 -- ============================================================================
 
 -- ----------------------------------------------------------------------------
